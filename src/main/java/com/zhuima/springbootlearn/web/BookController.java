@@ -89,4 +89,20 @@ public class BookController {
         bookService.delete(id);
     }
 
+
+    @PostMapping("/books/by")
+    public List<Book> findBy(@RequestParam String author, @RequestParam int status){
+//        return bookService.findByAuthor(author);
+        return bookService.findByAuthorAndStatus(author, status);
+    }
+
+    @PostMapping("/books/search")
+    public List<Book> findByNameStartsWith(@RequestParam String name){
+//        return bookService.findByAuthor(author);
+        return bookService.findByNameStartsWith(name);
+    }
+
+
+
+
 }

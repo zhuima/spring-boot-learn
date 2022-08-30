@@ -4,6 +4,7 @@ import com.zhuima.springbootlearn.domain.Book;
 import com.zhuima.springbootlearn.domain.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,5 +51,35 @@ public class BookService {
      */
     public void delete(long id) {
         bookRepository.deleteById(id);
+    }
+
+
+    /**
+     * 根据Author查询一个书单列表
+     * @param author
+     * @return
+     */
+    public List<Book> findByAuthor(String author) {
+        return bookRepository.findByAuthor(author);
+    }
+
+    /**
+     * 根据AuthorandStatus查询一个书单列表
+     * @param author
+     * @param status
+     * @return
+     */
+    public List<Book> findByAuthorAndStatus(String author, int status) {
+        return bookRepository.findByAuthorAndStatus(author, status);
+    }
+
+
+    /**
+     * 根据title模糊查询
+     * @param name
+     * @return
+     */
+    public List<Book> findByNameStartsWith(String name){
+        return bookRepository.findByNameStartsWith(name);
     }
 }
