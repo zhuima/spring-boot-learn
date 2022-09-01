@@ -3,9 +3,14 @@ package com.zhuima.springbootlearn.service;
 import com.zhuima.springbootlearn.domain.Book;
 import com.zhuima.springbootlearn.domain.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +25,19 @@ public class BookService {
      */
     public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+
+    /**
+     * 分页查询书单列表
+     * @return
+     */
+    public Page<Book> findAllByPage(Pageable pageable) {
+//        Sort sort =  Sort.by(Sort.Direction.DESC, "id", "name", "status", "description");
+//        int page;
+//        Pageable pageable = PageRequest.of(1, 5, sort);
+
+        return bookRepository.findAll(pageable);
     }
 
     /**
@@ -81,5 +99,16 @@ public class BookService {
      */
     public List<Book> findByNameStartsWith(String name){
         return bookRepository.findByNameStartsWith(name);
+    }
+
+    /**
+     * 自定义更新
+     * @param status
+     * @param id
+     * @return
+     */
+
+    public int updateByJPQL(int status, long id) {
+        return bookRepository.updateByJPQL(status, id);
     }
 }
