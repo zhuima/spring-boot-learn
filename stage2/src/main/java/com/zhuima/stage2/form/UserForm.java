@@ -43,12 +43,12 @@ public class UserForm {
         return user;
     }
 
-    public class UserFormConvert implements FormConvert<UserForm, User>{
+    private class UserFormConvert implements FormConvert<UserForm, User>{
 
         @Override
         public User convert(UserForm userForm){
             User user = new User();
-            BeanUtils.copyProperties(user, user);
+            BeanUtils.copyProperties(userForm, user);
             return user;
         }
 

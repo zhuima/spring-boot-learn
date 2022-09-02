@@ -52,7 +52,6 @@ public class LoginController {
         }
 
 
-
         if (!boo) {
             return "register";
         }
