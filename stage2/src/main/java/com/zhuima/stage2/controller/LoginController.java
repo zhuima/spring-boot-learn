@@ -5,6 +5,7 @@ import com.zhuima.stage2.form.UserForm;
 import com.zhuima.stage2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,9 @@ public class LoginController {
     private UserService userService;
 
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
+        // 这快是new， 怎么会有数据呢
+        model.addAttribute("userForm", new UserForm());
         return "register";
     }
 
@@ -33,26 +36,12 @@ public class LoginController {
 
     @PostMapping("/register")
     public String registerPost(@Valid UserForm userForm, BindingResult result) {
-        boolean boo = true;
 
         if (!userForm.confirmPassword()) {
             result.rejectValue( "confirmPassword",  "confirmError", "两次密码不一致");
-            boo = false;
         }
-
-
 
         if (result.hasErrors()) {
-            List<FieldError> fieldErrors  = result.getFieldErrors();
-
-            for (FieldError fieldError : fieldErrors) {
-                System.out.println(fieldError.getField() + " " + fieldError.getDefaultMessage() + " " + fieldError.getCode());
-            }
-            boo = false;
-        }
-
-
-        if (!boo) {
             return "register";
         }
 
@@ -62,5 +51,10 @@ public class LoginController {
     }
 
 
+
+    @GetMapping("/exception")
+    public String testException() {
+        throw new RuntimeException("Not implemented");
+    }
 
 }

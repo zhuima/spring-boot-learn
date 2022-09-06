@@ -10,26 +10,35 @@
     <div class="container" style="max-width: 700px; margin-top: 50px">
         <h2 class="text-center">注册表单</h2>
         <div class="card card-body">
-            <form action="#"  method="post">
+            <form action="#" th:object="${userForm}" method="post">
                 <div class="form-group">
                     <label for="usernameId">用户名</label>
-                    <input class="form-control" type="text" id="usernameId" name="username" placeholder="用户名" >
+                    <input class="form-control" type="text" id="usernameId" name="username" placeholder="用户名" th:field="*{username}">
+                    <p class="form-control-static text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">用户名不能为空</p>
                 </div>
                 <div class="form-group">
                     <label for="passwordId">密码</label>
-                    <input class="form-control"  type="password" id="passwordId" name="password" placeholder="密码">
+                    <input class="form-control"  type="password" id="passwordId" name="password" placeholder="密码" th:field="*{password}">
+                    <p class="form-control-static text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">密码不能为空</p>
+
                 </div>
                 <div class="form-group">
                     <label for="confirmPasswordId">确认密码</label>
-                    <input class="form-control"  type="password" id="confirmPasswordId" name="confirmPassword" placeholder="密码">
+                    <input class="form-control"  type="password" id="confirmPasswordId" name="confirmPassword" placeholder="密码" th:field="*{confirmPassword}">
+                    <p class="form-control-static text-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">密码不能为空</p>
+
                 </div>
                 <div class="form-group">
                     <label for="emailId">邮箱</label>
-                    <input class="form-control"  type="text" id="emailId" name="email" placeholder="邮箱">
+                    <input class="form-control"  type="text" id="emailId" name="email" placeholder="邮箱" th:field="*{email}">
+                    <p class="form-control-static text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">邮箱不能为空</p>
+
                 </div>
                 <div class="form-group">
                     <label for="phoneId">手机号</label>
-                    <input class="form-control"  type="text" id="phoneId" name="phone" placeholder="手机号">
+                    <input class="form-control"  type="text" id="phoneId" name="phone" placeholder="手机号" th:field="*{phone}">
+                    <p class="form-control-static text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">手机号不能为空</p>
+
                 </div>
                 <p style="margin-top: 10px;" class="text-center">
                     <button type="submit" class="btn btn-primary">注  册</button>

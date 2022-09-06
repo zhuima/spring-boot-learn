@@ -21,7 +21,6 @@ public class UserForm {
     @Size(min = 6, max = 16, message = "密码长度必须在{min}-{max}之间")
     private String password;
     @Size(min = 11, max = 11, message = "手机号不合法")
-    @NotEmpty(message = "手机号不能为空")
     @Pattern(message = "手机号不合法", regexp = REGEXP_PHONE )
     private String phone;
     @Size(min = 6, max = 16, message = "密码长度必须在{min}-{max}之间")
