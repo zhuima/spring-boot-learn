@@ -1,0 +1,31 @@
+package com.zhuima.springbootapi.util;
+
+import com.zhuima.springbootapi.domain.Book;
+import com.zhuima.springbootapi.dto.BookDto;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+
+import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CustomBeanUtils {
+    /**
+     * 获取所有的属性唯恐属性名数组
+     * @param source
+     * @return
+     */
+    public static String[] getnullPropertyNames(Object source){
+        BeanWrapper beanWrapper = new BeanWrapperImpl(source);
+        PropertyDescriptor[] pds = beanWrapper.getPropertyDescriptors();
+        List<String> nullPropertyNames = new ArrayList<String>();
+        for (PropertyDescriptor pd : pds) {
+            String propertyName = pd.getName();
+            if (beanWrapper.getPropertyValue(propertyName) == null) {
+                nullPropertyNames.add(propertyName);
+            }
+        }
+        return nullPropertyNames.toArray(new String[nullPropertyNames.size()]);
+    }
+}
